@@ -9,8 +9,8 @@ Recaptcha v3 documentation: https://developers.google.com/recaptcha/docs/v3
 ## Usage
 
 - Open https://www.google.com/recaptcha/admin#list
-- create new site
-- copy site_key and secret_key and put into config/initializer/new_google_recaptcha.rb
+- register a new site
+- copy `site_key` and `secret_key` and put into config/initializer/new_google_recaptcha.rb
 - in layout:
   ```erb
   <head>
