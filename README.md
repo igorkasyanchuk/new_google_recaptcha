@@ -76,6 +76,15 @@ Include Google Recaptcha v3 JS into your Rails app. In head, right before `</hea
 
 Action where recaptcha action was executed. Actions could be viewed in Admin console. More docs: https://developers.google.com/recaptcha/docs/v3. Action name could be "comments", "checkout", etc. Put any name and check scores in console.
 
+## TODO
+
+- check everything works with turbolinks
+- allow custom ID for input
+- return score ?
+- tests
+- handle exceptions with timeouts, json is not parsed
+- add support for non-Rails apps
+
 ## Contributing
 
 You are welcome to contribute.
