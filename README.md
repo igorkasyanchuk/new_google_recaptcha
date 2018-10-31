@@ -63,19 +63,18 @@ And edit new_google_recaptcha.rb and enter your site_key and secret_key.
 
 ## API
 
-### NewGoogleRecaptcha.human?(token, model)
+**NewGoogleRecaptcha.human?(token, model)** in contoller
 
 - token is received from google, must be sent to backend
 - model optional parameter. if you want to add error to model.
 
-### include_recaptcha_js
+**<%= include_recaptcha_js %>** in layout
 
 Include Google Recaptcha v3 JS into your Rails app. In head, right before `</head>`.
 
-### recaptcha_action(action_name)
+**<%= recaptcha_action(action_name) %>** in view
 
-Action where recaptcha action was executed. Actions could be viewed in Admin console. More docs: https://developers.google.com/recaptcha/docs/v3.
-
+Action where recaptcha action was executed. Actions could be viewed in Admin console. More docs: https://developers.google.com/recaptcha/docs/v3. Action name could be "comments", "checkout", etc. Put any name and check scores in console.
 
 ## Contributing
 
