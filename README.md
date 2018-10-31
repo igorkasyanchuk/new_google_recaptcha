@@ -84,6 +84,7 @@ Action where recaptcha action was executed. Actions could be viewed in Admin con
 - tests
 - handle exceptions with timeouts, json is not parsed
 - add support for non-Rails apps
+- add support for older Rails (should be easy since code is very simple)
 
 ## Contributing
 
