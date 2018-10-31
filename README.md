@@ -1,0 +1,86 @@
+# Google Recaptcha v3 + Rails
+
+Integrate Google Recaptcha v3 with Rails app. 
+
+Google Recaptcha console: https://www.google.com/recaptcha/admin#list
+
+Recaptcha v3 documentation: https://developers.google.com/recaptcha/docs/v3
+
+## Usage
+
+- Open https://www.google.com/recaptcha/admin#list
+- create new site
+- copy site_key and secret_key and put into config/initializer/new_google_recaptcha.rb
+- in layout:
+  ```erb
+  <head>
+    ...
+    <%= include_recaptcha_js %>
+  </head>
+  ```
+- in view where you for example you have a form:
+  ```erb
+  <form ...>
+    <%= recaptcha_action('checkout') %>
+  </form>
+  ```
+- in controller:
+  ```ruby
+  def create
+    @post = Post.new(post_params)
+    if NewGoogleRecaptcha.human?(params[:new_google_recaptcha_token], @post) && @post.save
+      redirect_to @post, notice: 'Post was successfully created.'
+    else
+      render :new
+    end
+  end
+  ```
+
+Also you can verify token without adding error to model:
+
+```ruby
+  NewGoogleRecaptcha.human?(params[:new_google_recaptcha_token])
+```
+
+## Installation
+
+```ruby
+gem 'new_google_recaptcha'
+```
+
+And then execute:
+```bash
+$ bundle
+```
+
+And then run:
+
+```bash
+$ rails generate new_google_recaptcha initializer
+```
+
+And edit new_google_recaptcha.rb and enter your site_key and secret_key.
+
+## API
+
+### NewGoogleRecaptcha.human?(token, model)
+
+- token is received from google, must be sent to backend
+- model optional parameter. if you want to add error to model.
+
+### include_recaptcha_js
+
+Include Google Recaptcha v3 JS into your Rails app. In head, right before `</head>`.
+
+### recaptcha_action(action_name)
+
+Action where recaptcha action was executed. Actions could be viewed in Admin console. More docs: https://developers.google.com/recaptcha/docs/v3.
+
+
+## Contributing
+
+You are welcome to contribute.
+
+## License
+
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
