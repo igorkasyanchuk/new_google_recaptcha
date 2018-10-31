@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Igor Kasyanchuk"]
   s.email       = ["igorkasyanchuk@gmail.com"]
   s.homepage    = "https://github.com/igorkasyanchuk/new_google_recaptcha"
-  s.summary     = "Google reCaptcha v3 + Rails"
-  s.description = "Google reCaptcha v3 + Rails (integration)"
+  s.summary     = "Google reCAPTCHA v3 + Rails"
+  s.description = "Google reCAPTCHA v3 + Rails (integration)"
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
