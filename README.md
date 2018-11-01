@@ -15,11 +15,14 @@ Recaptcha v3 documentation: https://developers.google.com/recaptcha/docs/v3
   ```erb
   <head>
     ...
-    <%= include_recaptcha_js %>
+    <%= yield :recaptcha_js %>
   </head>
   ```
 - in view where you for example you have a form:
   ```erb
+  <%= content_for :recaptcha_js do %>
+    <%= include_recaptcha_js %>
+  <% end %>
   <form ...>
     <%= recaptcha_action('checkout') %>
   </form>
@@ -68,7 +71,7 @@ And edit new_google_recaptcha.rb and enter your site_key and secret_key.
 - token is received from google, must be sent to backend
 - model optional parameter. if you want to add error to model.
 
-**<%= include_recaptcha_js %>** in layout
+**<%= include_recaptcha_js %>** in layout (by using yield)
 
 Include Google Recaptcha v3 JS into your Rails app. In head, right before `</head>`.
 
