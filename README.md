@@ -45,6 +45,8 @@ Also you can verify token without adding error to model:
   NewGoogleRecaptcha.human?(params[:new_google_recaptcha_token])
 ```
 
+Add to your navigation links `data-turbolinks="false"` to make it works with `turbolinks`.
+
 ## Installation
 
 ```ruby
