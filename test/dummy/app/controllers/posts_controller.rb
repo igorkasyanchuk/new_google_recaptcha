@@ -22,7 +22,7 @@ class PostsController < ApplicationController
   # POST /posts
   def create
     @post = Post.new(post_params)
-    if NewGoogleRecaptcha.human?(params[:new_google_recaptcha_token], @post) && @post.save
+    if NewGoogleRecaptcha.human?(params[:new_google_recaptcha_token], 0.9, 'manage_posts', @post) && @post.save
       redirect_to @post, notice: 'Post was successfully created.'
     else
       render :new

@@ -8,8 +8,8 @@ module NewGoogleRecaptcha
     yield(self)
   end
 
-  def self.human?(token, model = nil)
-    is_valid = NewGoogleRecaptcha::Validator.valid?(token)
+  def self.human?(token, minimum_score, action, model = nil)
+    is_valid = NewGoogleRecaptcha::Validator.valid?(token, minimum_score, action)
     if model && !is_valid
       model.errors.add(:base, "Looks like you are not a human")
     end
