@@ -11,3 +11,11 @@ test/dummy/tmp/
 .byebug_history
 vendor/bundle
 .ruby-version
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln

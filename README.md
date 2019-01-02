@@ -103,6 +103,22 @@ Include Google Recaptcha v3 JS into your Rails app. In head, right before `</hea
 
 Action where recaptcha action was executed. Actions could be viewed in Admin console. More docs: https://developers.google.com/recaptcha/docs/v3. Action name could be "comments", "checkout", etc. Put any name and check scores in console.
 
+## I18n support
+reCAPTCHA passes one types of error explanation to a linked model. It will use the I18n gem
+to translate the default error message if I18n is available. To customize the messages to your locale,
+add these keys to your I18n backend:
+
+`new_google_recaptcha.errors.verification_human` error message displayed when it is something like a robot, or a suspicious action
+
+Also you can translate API response errors to human friendly by adding translations to the locale (`config/locales/en.yml`):
+
+```Yaml
+en:
+  new_google_recaptcha:
+    errors:
+      verification_human: 'Fail'
+```
+
 ## TODO
 
 - check everything works with turbolinks
@@ -117,8 +133,10 @@ Action where recaptcha action was executed. Actions could be viewed in Admin con
 
 You are welcome to contribute.
 
-- [Igor Kasyanchuk](https://github.com/igorkasyanchuk) (maintainer)
-- [rubyconvict](https://github.com/rubyconvict)
+* [Igor Kasyanchuk](https://github.com/igorkasyanchuk) (maintainer)
+* [gilcierweb](https://github.com/gilcierweb)
+* [RoRElessar](https://github.com/RoRElessar)
+* [rubyconvict](https://github.com/rubyconvict)
 
 ## License
 

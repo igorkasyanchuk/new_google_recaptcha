@@ -12,10 +12,19 @@ module NewGoogleRecaptcha
   def self.human?(token, action, minimum_score = self.minimum_score, model = nil)
     is_valid = NewGoogleRecaptcha::Validator.valid?(token, action, minimum_score)
     if model && !is_valid
-      model.errors.add(:base, "Looks like you are not a human")
+      model.errors.add(:base, self.i18n("new_google_recaptcha.errors.verification_human", "Looks like you are not a human"))
     end
     is_valid
   end
+
+  def self.i18n(key, default)
+    if defined?(I18n)
+      I18n.translate(key, default: default)
+    else
+      default
+    end
+  end
+
 end
 
 require_relative "new_google_recaptcha/view_ext"
