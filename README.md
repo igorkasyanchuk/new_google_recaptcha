@@ -31,7 +31,7 @@ Recaptcha v3 documentation: https://developers.google.com/recaptcha/docs/v3
   ```ruby
   def create
     @post = Post.new(post_params)
-    if NewGoogleRecaptcha.human?(params[:new_google_recaptcha_token], @post) && @post.save
+    if NewGoogleRecaptcha.human?(params[:new_google_recaptcha_token], 0.5, "checkout", @post) && @post.save
       redirect_to @post, notice: 'Post was successfully created.'
     else
       render :new
@@ -42,7 +42,7 @@ Recaptcha v3 documentation: https://developers.google.com/recaptcha/docs/v3
 Also you can verify token without adding error to model:
 
 ```ruby
-  NewGoogleRecaptcha.human?(params[:new_google_recaptcha_token])
+  NewGoogleRecaptcha.human?(params[:new_google_recaptcha_token], 0.5, "checkout")
 ```
 
 Add to your navigation links `data-turbolinks="false"` to make it works with `turbolinks`.
