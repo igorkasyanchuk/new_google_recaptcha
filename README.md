@@ -46,12 +46,22 @@ Recaptcha v3 documentation: https://developers.google.com/recaptcha/docs/v3
   end
   ```
 
-Also you can verify recaptcha without using these arguments:
+There are two mandatory arguments for `human?` method:
 
-- `minimum_score` - defaults to value set in the initializer,
-  reCAPTCHA recommends using 0.5 as default
+- `token` - token valid for your site
+- `action` - the action name for this request
+  (the gem checks if it is the same as the name used with the token,
+  otherwise a hacker could replace it on frontend to some another action used,
+  but with lower score requirement and thus pass the verification)
+
+You can verify recaptcha without using these arguments:
+
+- `minimum_score` - defaults to value set in the initializer
+  (reCAPTCHA recommends using 0.5 as default)
 - `model` - defaults to `nil` which will result in not adding an error to model;
   any custom failure handling is applicable here
+
+like this:
 
 ```ruby
   NewGoogleRecaptcha.human?(params[:new_google_recaptcha_token], "checkout")
