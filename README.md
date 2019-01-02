@@ -91,9 +91,12 @@ Action where recaptcha action was executed. Actions could be viewed in Admin con
 - add support for non-Rails apps
 - add support for older Rails (should be easy since code is very simple)
 
-## Contributing
+## Contributors
 
 You are welcome to contribute.
+
+- [Igor Kasyanchuk](https://github.com/igorkasyanchuk) (maintainer)
+- [rubyconvict](https://github.com/rubyconvict)
 
 ## License
 
