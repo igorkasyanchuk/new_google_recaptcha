@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", ">= 4.2.0"
 
-  s.add_development_dependency "sqlite3"
-  s.add_development_dependency "byebug"
-  s.add_development_dependency "webmock"
+  s.add_development_dependency "sqlite3", '>= 1.3'
+  s.add_development_dependency "byebug", '>= 10.0'
+  s.add_development_dependency "webmock", '>= 3.5'
 end
