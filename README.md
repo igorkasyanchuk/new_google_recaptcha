@@ -111,6 +111,10 @@ en:
 
 You are welcome to contribute.
 
+## Contributors
+
+* https://github.com/gilcierweb 
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
