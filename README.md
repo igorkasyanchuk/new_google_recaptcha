@@ -114,6 +114,8 @@ You are welcome to contribute.
 ## Contributors
 
 * https://github.com/gilcierweb 
+* https://github.com/rubyconvict 
+* https://github.com/RoRElessar 
 
 ## License
 
