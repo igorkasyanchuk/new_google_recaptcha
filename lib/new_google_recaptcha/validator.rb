@@ -2,7 +2,7 @@ require 'net/http'
 
 module NewGoogleRecaptcha
   class Validator
-    def self.valid?(token, minimum_score, action)
+    def self.valid?(token, action, minimum_score)
       uri    = URI("https://www.google.com/recaptcha/api/siteverify?secret=#{NewGoogleRecaptcha.secret_key}&response=#{token}")
       result = JSON.parse(Net::HTTP.get(uri))
       conditions = []

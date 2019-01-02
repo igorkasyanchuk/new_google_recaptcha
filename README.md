@@ -10,7 +10,8 @@ Recaptcha v3 documentation: https://developers.google.com/recaptcha/docs/v3
 
 - Open https://www.google.com/recaptcha/admin#list
 - register a new site
-- copy `site_key` and `secret_key` and put into config/initializer/new_google_recaptcha.rb
+- copy `site_key` and `secret_key` and put into config/initializers/new_google_recaptcha.rb
+- optionally, change the `minimum_score` in the initializer to a preferred float value (from 0.0 to 1.0)
 - in layout:
   ```erb
   <head>
@@ -24,6 +25,7 @@ Recaptcha v3 documentation: https://developers.google.com/recaptcha/docs/v3
     <%= include_recaptcha_js %>
   <% end %>
   <form ...>
+    <%#= 'checkout' is action name to be verified later %>
     <%= recaptcha_action('checkout') %>
   </form>
   ```
@@ -31,7 +33,12 @@ Recaptcha v3 documentation: https://developers.google.com/recaptcha/docs/v3
   ```ruby
   def create
     @post = Post.new(post_params)
-    if NewGoogleRecaptcha.human?(params[:new_google_recaptcha_token], 0.5, "checkout", @post) && @post.save
+    if NewGoogleRecaptcha.human?(
+        params[:new_google_recaptcha_token],
+        "checkout",
+        NewGoogleRecaptcha.minimum_score,
+        @post
+      ) && @post.save
       redirect_to @post, notice: 'Post was successfully created.'
     else
       render :new
@@ -39,10 +46,15 @@ Recaptcha v3 documentation: https://developers.google.com/recaptcha/docs/v3
   end
   ```
 
-Also you can verify token without adding error to model:
+Also you can verify recaptcha without using these arguments:
+
+- `minimum_score` - defaults to value set in the initializer,
+  reCAPTCHA recommends using 0.5 as default
+- `model` - defaults to `nil` which will result in not adding an error to model;
+  any custom failure handling is applicable here
 
 ```ruby
-  NewGoogleRecaptcha.human?(params[:new_google_recaptcha_token], 0.5, "checkout")
+  NewGoogleRecaptcha.human?(params[:new_google_recaptcha_token], "checkout")
 ```
 
 Add to your navigation links `data-turbolinks="false"` to make it works with `turbolinks`.

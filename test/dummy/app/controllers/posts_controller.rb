@@ -22,7 +22,12 @@ class PostsController < ApplicationController
   # POST /posts
   def create
     @post = Post.new(post_params)
-    if NewGoogleRecaptcha.human?(params[:new_google_recaptcha_token], 0.9, 'manage_posts', @post) && @post.save
+    if NewGoogleRecaptcha.human?(
+        params[:new_google_recaptcha_token],
+        'manage_posts',
+        NewGoogleRecaptcha.minimum_score,
+        @post
+      ) && @post.save
       redirect_to @post, notice: 'Post was successfully created.'
     else
       render :new
@@ -31,7 +36,9 @@ class PostsController < ApplicationController
 
   # PATCH/PUT /posts/1
   def update
-    if @post.update(post_params)
+    captcha = NewGoogleRecaptcha.human?(params[:new_google_recaptcha_token], 'manage_posts')
+    flash[:error] = "Looks like you are not a human" unless captcha
+    if captcha && @post.update(post_params)
       redirect_to @post, notice: 'Post was successfully updated.'
     else
       render :edit

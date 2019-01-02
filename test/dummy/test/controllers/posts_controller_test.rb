@@ -36,4 +36,25 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
 
     assert_includes response.body.to_s, "Looks like you are not a human"
   end
+
+  test "should update post with recaptcha success using defaults as arguments" do
+    stub_recaptcha_success
+
+    patch post_url(@post), params: { post: { body: @post.body, title: @post.title } }
+    assert_redirected_to post_url(@post)
+  end
+
+  test "should not update post with recaptcha when failed to pass score level using defaults as arguments" do
+    stub_recaptcha_fail_score
+
+    patch post_url(@post), params: { post: { body: @post.body, title: @post.title } }
+    assert_includes response.body.to_s, "Looks like you are not a human"
+  end
+
+  test "should not update post when failed to pass action match using defaults as arguments" do
+    stub_recaptcha_fail_action
+
+    patch post_url(@post), params: { post: { body: @post.body, title: @post.title } }
+    assert_includes response.body.to_s, "Looks like you are not a human"
+  end
 end
