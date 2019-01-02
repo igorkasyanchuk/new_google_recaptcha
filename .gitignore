@@ -10,3 +10,4 @@ test/dummy/storage/
 test/dummy/tmp/
 .byebug_history
 vendor/bundle
+.ruby-version
