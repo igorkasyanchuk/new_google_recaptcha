@@ -7,7 +7,7 @@ require "new_google_recaptcha/version"
 Gem::Specification.new do |s|
   s.name        = "new_google_recaptcha"
   s.version     = NewGoogleRecaptcha::VERSION
-  s.authors     = ["Igor Kasyanchuk"]
+  s.authors     = ["Igor Kasyanchuk", "rubyconvict"]
   s.email       = ["igorkasyanchuk@gmail.com"]
   s.homepage    = "https://github.com/igorkasyanchuk/new_google_recaptcha"
   s.summary     = "Google reCaptcha v3 + Rails"
