@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    new_google_recaptcha (1.0.0)
+    new_google_recaptcha (0.2.0)
       rails (>= 4.2.0)
 
 GEM
