@@ -124,7 +124,7 @@ en:
 - check everything works with turbolinks
 - allow custom ID for input
 - return score ?
-- tests
+- more tests
 - handle exceptions with timeouts, json is not parsed
 - add support for non-Rails apps
 - add support for older Rails (should be easy since code is very simple)
