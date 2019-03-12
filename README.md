@@ -103,6 +103,41 @@ Include Google Recaptcha v3 JS into your Rails app. In head, right before `</hea
 
 Action where recaptcha action was executed. Actions could be viewed in Admin console. More docs: https://developers.google.com/recaptcha/docs/v3. Action name could be "comments", "checkout", etc. Put any name and check scores in console.
 
+## How to add to devise
+
+Generate Devise controllers and views, and edit "create" method.
+
+```ruby
+class Users::RegistrationsController < Devise::RegistrationsController
+...
+  def create
+    build_resource(sign_up_params)
+
+    NewGoogleRecaptcha.human?(
+      params[:new_google_recaptcha_token],
+      "user",
+      NewGoogleRecaptcha.minimum_score,
+      resource) && resource.save
+
+    yield resource if block_given?
+    if resource.persisted?
+      if resource.active_for_authentication?
+        set_flash_message! :notice, :signed_up
+        sign_up(resource_name, resource)
+        respond_with resource, location: after_sign_up_path_for(resource)
+      else
+        set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
+        expire_data_after_sign_in!
+        respond_with resource, location: after_inactive_sign_up_path_for(resource)
+      end
+    else
+      clean_up_passwords resource
+      set_minimum_password_length
+      respond_with resource
+    end
+  end
+```
+
 ## How to use in test or specs
 
 At the end of the spec/rails_helper.rb put:
