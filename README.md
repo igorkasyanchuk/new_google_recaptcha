@@ -90,18 +90,31 @@ And edit new_google_recaptcha.rb and enter your site_key and secret_key.
 
 ## API
 
-**NewGoogleRecaptcha.human?(token, model)** in contoller
+`NewGoogleRecaptcha.human?(token, model)` in contoller
 
 - token is received from google, must be sent to backend
 - model optional parameter. if you want to add error to model.
 
-**<%= include_recaptcha_js %>** in layout (by using yield)
+`<%= include_recaptcha_js %>` in layout (by using yield)
 
 Include Google Recaptcha v3 JS into your Rails app. In head, right before `</head>`.
 
-**<%= recaptcha_action(action_name) %>** in view
+`<%= recaptcha_action(action_name) %>` in view
 
 Action where recaptcha action was executed. Actions could be viewed in Admin console. More docs: https://developers.google.com/recaptcha/docs/v3. Action name could be "comments", "checkout", etc. Put any name and check scores in console.
+
+## How to use in test or specs
+
+At the end of the spec/rails_helper.rb put:
+
+```ruby
+module NewGoogleRecaptcha
+  def self.human?(*attrs)
+    true
+  end
+end
+```
+
 
 ## I18n support
 reCAPTCHA passes one types of error explanation to a linked model. It will use the I18n gem
