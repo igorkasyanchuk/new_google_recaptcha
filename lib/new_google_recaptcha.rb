@@ -25,6 +25,12 @@ module NewGoogleRecaptcha
     end
   end
 
+  def self.compose_uri(token)
+    URI(
+      "https://www.google.com/recaptcha/api/siteverify?"\
+      "secret=#{self.secret_key}&response=#{token}"
+    )
+  end
 end
 
 require_relative "new_google_recaptcha/view_ext"
