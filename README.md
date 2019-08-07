@@ -1,5 +1,7 @@
 # Google Recaptcha v3 + Rails
 
+[![Build Status](https://travis-ci.org/igorkasyanchuk/new_google_recaptcha.svg?branch=master)](https://travis-ci.org/igorkasyanchuk/new_google_recaptcha)
+
 Integrate Google Recaptcha v3 with Rails app.
 
 Google Recaptcha console: https://www.google.com/recaptcha/admin#list
@@ -44,14 +46,13 @@ Recaptcha v3 documentation: https://developers.google.com/recaptcha/docs/v3
       render :new
     end
   end
-  ```
+
 
   # or
   # if you need to capture a humanity `score` from Google
   # before you need to add a column for example `humanity_score` (type: float) where this score will be saved.
 
 
-  ```ruby
   def create
     @post = Post.new(post_params)
     humanity_details =
@@ -93,13 +94,15 @@ like this:
   NewGoogleRecaptcha.human?(params[:new_google_recaptcha_token], "checkout")
 ```
 
+### Saving humanity score from Google in your model
+
 `get_humanity_detailed` method acts like `human?` method, the only difference is that it returns following hash with three key-value pairs:
 
 - `is_human` - whether actor is a human or not (same as result of `human?` method)
 - `score` - actual humanity score from recaptcha response
 - `model` - model which you trying to save
 
-It could be handy if you want to store score in db or put it into logs or smth else.
+It could be handy if you want to store score in db or put it into logs or smth else. Real example is above in the code samples.
 
 Add to your navigation links `data-turbolinks="false"` to make it works with `turbolinks`.
 
