@@ -31,7 +31,7 @@ class BooksController < ApplicationController
         @book
       )
 
-    @book.humanity_score = humanity_datailed[:actual_score]
+    @book.humanity_score = humanity_datailed[:score]
 
     if humanity_datailed[:is_human] && @book.save
       redirect_to @book, notice: 'Book was successfully created.'
@@ -50,7 +50,7 @@ class BooksController < ApplicationController
     flash[:error] = "Looks like you are not a human" unless humanity_datailed[:is_human]
 
     if humanity_datailed[:is_human] &&
-      @book.update(params_with_humanity(humanity_datailed[:actual_score]))
+      @book.update(params_with_humanity(humanity_datailed[:score]))
       redirect_to @book, notice: 'Book was successfully updated.'
     else
       render :edit

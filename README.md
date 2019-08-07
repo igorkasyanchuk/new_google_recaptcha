@@ -45,7 +45,12 @@ Recaptcha v3 documentation: https://developers.google.com/recaptcha/docs/v3
     end
   end
   ```
-  or
+
+  # or
+  # if you need to capture a humanity `score` from Google
+  # before you need to add a column for example `humanity_score` (type: float) where this score will be saved.
+
+
   ```ruby
   def create
     @post = Post.new(post_params)
@@ -57,7 +62,7 @@ Recaptcha v3 documentation: https://developers.google.com/recaptcha/docs/v3
         @post
       )
 
-    @post.humanity_score = humanity_details[:actual_score]
+    @post.humanity_score = humanity_details[:score]
 
     if humanity_details[:is_human] && @post.save
       redirect_to @post, notice: 'Post was successfully created.'
@@ -88,10 +93,11 @@ like this:
   NewGoogleRecaptcha.human?(params[:new_google_recaptcha_token], "checkout")
 ```
 
-`get_humanity_detailed` method acts like `human?` method,
-the only difference is that it returns following hash with two key-value pairs:
+`get_humanity_detailed` method acts like `human?` method, the only difference is that it returns following hash with three key-value pairs:
+
 - `is_human` - whether actor is a human or not (same as result of `human?` method)
-- `actual_score` - actual humanity score from recaptcha response
+- `score` - actual humanity score from recaptcha response
+- `model` - model which you trying to save
 
 It could be handy if you want to store score in db or put it into logs or smth else.
 
@@ -131,7 +137,7 @@ Include Google Recaptcha v3 JS into your Rails app. In head, right before `</hea
 
 Action where recaptcha action was executed. Actions could be viewed in Admin console. More docs: https://developers.google.com/recaptcha/docs/v3. Action name could be "comments", "checkout", etc. Put any name and check scores in console.
 
-## How to add to devise
+## How to add to the Devise
 
 Generate Devise controllers and views, and edit "create" method.
 
@@ -178,8 +184,11 @@ module NewGoogleRecaptcha
 end
 ```
 
+Tests are located in `specs` folder and `test/dummy/tests` folder.
+
 
 ## I18n support
+
 reCAPTCHA passes one types of error explanation to a linked model. It will use the I18n gem
 to translate the default error message if I18n is available. To customize the messages to your locale,
 add these keys to your I18n backend:
@@ -199,7 +208,6 @@ en:
 
 - check everything works with turbolinks
 - allow custom ID for input
-- return score ?
 - more tests
 - handle exceptions with timeouts, json is not parsed
 - add support for non-Rails apps
@@ -213,6 +221,7 @@ You are welcome to contribute.
 * [gilcierweb](https://github.com/gilcierweb)
 * [RoRElessar](https://github.com/RoRElessar)
 * [rubyconvict](https://github.com/rubyconvict)
+* [adelnabiullin](https://github.com/adelnabiullin)
 
 ## License
 
