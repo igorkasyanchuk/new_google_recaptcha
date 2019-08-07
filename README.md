@@ -1,6 +1,6 @@
 # Google Recaptcha v3 + Rails
 
-Integrate Google Recaptcha v3 with Rails app. 
+Integrate Google Recaptcha v3 with Rails app.
 
 Google Recaptcha console: https://www.google.com/recaptcha/admin#list
 
@@ -45,6 +45,27 @@ Recaptcha v3 documentation: https://developers.google.com/recaptcha/docs/v3
     end
   end
   ```
+  or
+  ```ruby
+  def create
+    @post = Post.new(post_params)
+    humanity_details =
+      NewGoogleRecaptcha.get_humanity_detailed(
+        params[:new_google_recaptcha_token],
+        "checkout",
+        NewGoogleRecaptcha.minimum_score,
+        @post
+      )
+
+    @post.humanity_score = humanity_details[:actual_score]
+
+    if humanity_details[:is_human] && @post.save
+      redirect_to @post, notice: 'Post was successfully created.'
+    else
+      render :new
+    end
+  end
+  ```
 
 There are two mandatory arguments for `human?` method:
 
@@ -66,6 +87,13 @@ like this:
 ```ruby
   NewGoogleRecaptcha.human?(params[:new_google_recaptcha_token], "checkout")
 ```
+
+`get_humanity_detailed` method acts like `human?` method,
+the only difference is that it returns following hash with two key-value pairs:
+- `is_human` - whether actor is a human or not (same as result of `human?` method)
+- `actual_score` - actual humanity score from recaptcha response
+
+It could be handy if you want to store score in db or put it into logs or smth else.
 
 Add to your navigation links `data-turbolinks="false"` to make it works with `turbolinks`.
 
@@ -90,7 +118,7 @@ And edit new_google_recaptcha.rb and enter your site_key and secret_key.
 
 ## API
 
-`NewGoogleRecaptcha.human?(token, model)` in contoller
+`NewGoogleRecaptcha.human?(token, model)` or `NewGoogleRecaptcha.get_humanity_detailed(token, model)` in contoller
 
 - token is received from google, must be sent to backend
 - model optional parameter. if you want to add error to model.
