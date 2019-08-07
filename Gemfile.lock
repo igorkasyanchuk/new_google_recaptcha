@@ -148,7 +148,7 @@ DEPENDENCIES
   mocha (~> 0.14.0)
   new_google_recaptcha!
   redis-store-testing
-  sqlite3 (>= 1.3)
+  sqlite3
   webmock (>= 3.5)
 
 BUNDLED WITH

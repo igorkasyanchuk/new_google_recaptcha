@@ -12,3 +12,7 @@ gemspec
 # your gem to rubygems.org.
 
 # To use a debugger
+
+group :test do
+  gem "sqlite3"
+end
