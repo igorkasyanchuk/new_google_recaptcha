@@ -12,4 +12,13 @@ gemspec
 # your gem to rubygems.org.
 
 # To use a debugger
-# gem 'byebug', group: [:development, :test]
+
+group :test do
+  gem "sqlite3", '>= 1.3'
+  gem "byebug", '>= 10.0'
+  gem "webmock", '>= 3.5'
+  gem "mocha", '~> 0.14.0'
+  gem "redis-store-testing"
+  gem "connection_pool", '~> 1.2.0'
+  gem "appraisal"
+end

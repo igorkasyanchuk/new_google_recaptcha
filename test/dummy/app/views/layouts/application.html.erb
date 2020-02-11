@@ -11,6 +11,14 @@
     <%= include_recaptcha_js %>
   </head>
   <body>
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+    <ul>
+      <li><%= link_to 'Posts', :posts %></li>
+      <li><%= link_to 'Books', :books %></li>
+    </ul>
+
     <%= yield %>
   </body>
 </html>
