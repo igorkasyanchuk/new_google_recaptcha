@@ -13,7 +13,10 @@ module NewGoogleRecaptcha
 
     def call
       uri    = NewGoogleRecaptcha.compose_uri(token)
-      result = JSON.parse(Net::HTTP.get(uri))
+      
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true if uri.scheme == 'https' 
+      result = JSON.parse(http.request(Net::HTTP::Get.new(uri)).body)
 
       @score = result['score'].to_f
 
