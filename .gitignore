@@ -21,3 +21,5 @@ vendor/bundle
 *.sln
 
 .DS_Store
+
+*.gem

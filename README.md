@@ -225,6 +225,7 @@ You are welcome to contribute.
 * [RoRElessar](https://github.com/RoRElessar)
 * [rubyconvict](https://github.com/rubyconvict)
 * [adelnabiullin](https://github.com/adelnabiullin)
+* [jhill](https://github.com/jhill)
 
 ## License
 
