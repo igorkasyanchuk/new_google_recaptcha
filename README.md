@@ -1,6 +1,7 @@
 # Google Recaptcha v3 + Rails
 
 [![Build Status](https://travis-ci.org/igorkasyanchuk/new_google_recaptcha.svg?branch=master)](https://travis-ci.org/igorkasyanchuk/new_google_recaptcha)
+[![RailsJazz](https://github.com/igorkasyanchuk/rails_time_travel/blob/main/docs/my_other.svg?raw=true)](https://www.railsjazz.com)
 
 Integrate Google Recaptcha v3 with Rails app.
 
