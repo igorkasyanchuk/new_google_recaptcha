@@ -209,6 +209,17 @@ en:
       verification_human: 'Fail'
 ```
 
+## Badge position
+
+NewGoogleRecaptcha allows you to render badge in different positions
+
+```ruby
+    <%= include_recaptcha_js badge: "bottomleft" %>
+```
+
+Three of existing `badge` values are `bottomright`, `bottomleft` and `inline`.
+'inline' lets you position it with CSS. 
+
 ## TODO
 
 - check everything works with turbolinks
