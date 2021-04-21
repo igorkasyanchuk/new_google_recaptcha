@@ -226,6 +226,7 @@ You are welcome to contribute.
 * [rubyconvict](https://github.com/rubyconvict)
 * [adelnabiullin](https://github.com/adelnabiullin)
 * [jhill](https://github.com/jhill)
+* [dachinat](https://github.com/dachinat)
 
 ## License
 
