@@ -2,8 +2,13 @@ module NewGoogleRecaptcha
   module ViewExt
     include ActionView::Helpers::TagHelper
 
-    def include_recaptcha_js
-      generate_recaptcha_callback + javascript_include_tag("https://www.google.com/recaptcha/api.js?render=#{NewGoogleRecaptcha.site_key}&onload=newGoogleRecaptchaCallback", defer: true)
+    def include_recaptcha_js(opts = {})
+      badge = opts[:badge] ? "&badge=#{opts[:badge]}" : ""
+      generate_recaptcha_callback +
+        javascript_include_tag(
+          "https://www.google.com/recaptcha/api.js?render=#{NewGoogleRecaptcha.site_key}&onload=newGoogleRecaptchaCallback#{badge}",
+          defer: true
+        )
     end
 
     def recaptcha_action(action)
