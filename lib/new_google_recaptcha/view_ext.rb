@@ -14,7 +14,7 @@ module NewGoogleRecaptcha
     def recaptcha_action(action)
       id = "new_google_recaptcha_token_#{SecureRandom.hex(10)}"
       hidden_field_tag(
-        'new_recaptcha_token',
+        'new_google_recaptcha_token',
         nil,
         readonly: true,
         'data-google-recaptcha-action' => action,
