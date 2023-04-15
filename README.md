@@ -39,7 +39,7 @@ Recaptcha v3 documentation: https://developers.google.com/recaptcha/docs/v3
   def create
     @post = Post.new(post_params)
     if NewGoogleRecaptcha.human?(
-        params[:new_google_recaptcha_token],
+        params[:new_recaptcha_token],
         "checkout",
         NewGoogleRecaptcha.minimum_score,
         @post
@@ -60,7 +60,7 @@ Recaptcha v3 documentation: https://developers.google.com/recaptcha/docs/v3
     @post = Post.new(post_params)
     humanity_details =
       NewGoogleRecaptcha.get_humanity_detailed(
-        params[:new_google_recaptcha_token],
+        params[:new_recaptcha_token],
         "checkout",
         NewGoogleRecaptcha.minimum_score,
         @post
@@ -94,7 +94,7 @@ You can verify recaptcha without using these arguments:
 like this:
 
 ```ruby
-  NewGoogleRecaptcha.human?(params[:new_google_recaptcha_token], "checkout")
+  NewGoogleRecaptcha.human?(params[:new_recaptcha_token], "checkout")
 ```
 
 ### Saving humanity score from Google in your model
@@ -154,7 +154,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     build_resource(sign_up_params)
 
     NewGoogleRecaptcha.human?(
-      params[:new_google_recaptcha_token],
+      params[:new_recaptcha_token],
       "user",
       NewGoogleRecaptcha.minimum_score,
       resource) && resource.save
