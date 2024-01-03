@@ -38,7 +38,7 @@ module NewGoogleRecaptcha
       model.errors.add(:base, self.i18n("new_google_recaptcha.errors.verification_human", "Looks like you are not a human"))
     end
 
-    { is_human: is_valid, score: validator.score, model: model }
+    { is_human: is_valid, result: validator.result, score: validator.score, model: model }
   end
 
   def self.i18n(key, default)
