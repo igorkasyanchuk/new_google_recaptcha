@@ -10,18 +10,8 @@ module NewGoogleRecaptcha
   end
 
   def self.human?(token, action, minimum_score = self.minimum_score, model = nil)
-    is_valid =
-      NewGoogleRecaptcha::Validator.new(
-        token: token,
-        action: action,
-        minimum_score: minimum_score
-      ).call
-
-    if model && !is_valid
-      model.errors.add(:base, self.i18n("new_google_recaptcha.errors.verification_human", "Looks like you are not a human"))
-    end
-
-    is_valid
+    details = get_humanity_detailed(token, action, minimum_score, model)
+    details[:is_human]
   end
 
   def self.get_humanity_detailed(token, action, minimum_score = self.minimum_score, model = nil)
@@ -32,13 +22,13 @@ module NewGoogleRecaptcha
         minimum_score: minimum_score
       )
 
-    is_valid = validator.call
+    is_human = validator.call
 
-    if model && !is_valid
+    if model && !is_human
       model.errors.add(:base, self.i18n("new_google_recaptcha.errors.verification_human", "Looks like you are not a human"))
     end
 
-    { is_human: is_valid, result: validator.result, score: validator.score, model: model }
+    { is_human: is_human, result: validator.result, score: validator.score, model: model }
   end
 
   def self.i18n(key, default)
